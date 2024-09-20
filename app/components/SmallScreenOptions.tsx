@@ -15,8 +15,8 @@ export default function SmallScreenOptions() {
     }
 
     return (
-        <div className={styles.mobile_screen_sidebar} style={{left: sideBarState === "open" ? "0" : "100%"}}>
-            <FontAwesomeIcon onClick={()=>{closeOptions()}} icon={faTimes} className={styles.close_button}/>
+        <div className={`${styles.mobile_screen_sidebar} mobile_screen_sidebar`} style={{left: sideBarState === "open" ? "0" : "100%"}}>
+            <FontAwesomeIcon onClick={()=>{closeOptions()}} icon={faTimes} className={`${styles.close_button} close_button`}/>
 
             <div style={{display: "flex",  width: "100%", flexDirection: "column"}}>
                 <Link href="#" style={{textAlign: "center"}}>Home</Link>

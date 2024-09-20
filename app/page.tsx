@@ -105,13 +105,13 @@ export default function Home() {
   return (
     <>
       <div className={styles.services_list}>
-        <div className={styles.services_list_left}>
+        <div className={`${styles.services_list_left} services_list_left`}>
             <Link href="#">Buy</Link>
             <Link href="#">Rent</Link>
             <Link href="#">Sell</Link>
             <Link href="#">Home Loans</Link>
         </div>
-        <div className={styles.services_list_right}>
+        <div className={`${styles.services_list_right} services_list_right`}>
             <Link href="#">Advertise</Link>
             <Link href="#">Manage Rentals</Link>
         </div>
@@ -139,7 +139,7 @@ export default function Home() {
           </div>
       </div>
 
-      <div className={styles.short_desc}>
+      <div className={`${styles.short_desc} short_desc`}>
         <h2>Start Your Home Journey</h2>
         <p>Discover curated Homes to find your perfect fit</p>
       </div>
@@ -162,7 +162,7 @@ export default function Home() {
         }
       </div>
 
-      <div className={styles.short_desc}>
+      <div className={`${styles.short_desc} short_desc`}>
         <h2>What are you interested in?</h2>
         <p>From subtle elegance to bold statements.</p>
       </div>
@@ -193,7 +193,7 @@ export default function Home() {
         }
       </div>
 
-      <div className={styles.short_desc}>
+      <div className={`${styles.short_desc} short_desc`}>
         <h2>Select your preferred location</h2>
         <p>We offer beautiful homes at excellent locations</p>
       </div>
@@ -216,15 +216,15 @@ export default function Home() {
         }
       </div>
 
-      <div className={styles.short_desc}>
+      <div className={`${styles.short_desc} short_desc`}>
         <h2>Featured Houses for Sale and Rent</h2>
         <p>Check out some of our featured homes available for purchase or rent</p>
       </div>
 
-      <div className={styles.search_results} style={{padding: "10px"}}>
+      <div className={`${styles.search_results} search_results`}>
         {
           featuredHomes.map((home, index)=>
-            <div key={index} className={styles.search_result}>
+            <div key={index} className={`${styles.search_result} search_result`}>
               <Link href="/product" className={styles.search_result_image_container}>
                 <Image
                   src={Img2}
@@ -244,7 +244,7 @@ export default function Home() {
               </Link>
               <h3>$450,000</h3>
               
-              <div className={styles.bottom_section}>
+              <div className={`${styles.bottom_section} bottom_section`}>
                 <p><span style={{fontWeight: "bold"}}>3</span> beds | <span style={{fontWeight: "bold"}}>2</span>ba | <span style={{fontWeight: "bold"}}>912</span> sqft - House for Sale</p>
                 <p><FontAwesomeIcon icon={faLocationDot} /> 206 Watson Rd, North Syracuse, NY 13212</p>
               </div>
@@ -252,8 +252,6 @@ export default function Home() {
           )
         }
       </div>
-
-      <p style={{backgroundColor: "rgb(51, 51, 51)", textAlign: "center", padding: "20px", margin: "20px 0", color: "white", fontSize: "1.5em"}}>Your one stop location for all your Housing needs</p>
     </>
   );
 }

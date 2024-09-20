@@ -13,6 +13,10 @@
     object-fit: cover;
 }
 
+.logo img:nth-child(2){ 
+    display: none !important;
+}
+
 .search_box{
     flex: 4;
     display: flex;
