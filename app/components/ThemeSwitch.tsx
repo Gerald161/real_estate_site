@@ -123,6 +123,10 @@ export default function ThemeSwitch() {
                             .copyright{
                                 color: white;
                             }
+
+                            .first_section h2, .first_section h3, .first_section p{
+                                color: white;
+                            }
                         }
                     `
                     }</style>

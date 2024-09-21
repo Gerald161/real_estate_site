@@ -14,7 +14,7 @@ export default function Navbar() {
   return (
     <>
       <nav>
-        <Link href="" className={`${styles.logo} logo`}>
+        <Link href="/" className={`${styles.logo} logo`}>
           <Image
             src={LogoImage}
             alt="Logo Image"
