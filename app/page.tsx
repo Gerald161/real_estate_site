@@ -106,7 +106,7 @@ export default function Home() {
     <>
       <div className={styles.services_list}>
         <div className={`${styles.services_list_left} services_list_left`}>
-            <Link href="#">Buy</Link>
+            <Link href="/a">Buy</Link>
             <Link href="#">Rent</Link>
             <Link href="#">Sell</Link>
             <Link href="#">Home Loans</Link>
@@ -147,7 +147,7 @@ export default function Home() {
       <div className={styles.featured_styles}>
         {
           preferences.map((preference, index)=>
-            <Link key={index} href="/search" className={styles.featured_style}>
+            <Link key={index} href="/a" className={styles.featured_style}>
               <Image
                   src={preference.img}
                   alt={`Featured Image ${index}`}
