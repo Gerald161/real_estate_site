@@ -43,7 +43,7 @@ export default function QuestionsSection({ slug }: { slug: string }) {
 
             var myHeaders = new Headers();
 
-            myHeaders.append("Authorization", `Token ${process.env.NEXT_PUBLIC_TOKEN}`);
+            // myHeaders.append("Authorization", `Token ${process.env.NEXT_PUBLIC_TOKEN}`);
 
             var formdata = new FormData();
             
@@ -52,12 +52,12 @@ export default function QuestionsSection({ slug }: { slug: string }) {
             formdata.append("question", JSON.stringify(chatlog.current));
 
             var requestOptions = {
-                method: 'POST',
+                method: 'GET',
                 headers: myHeaders,
                 body: formdata,
             };
 
-            // var res = await fetch(`${process.env.NEXT_PUBLIC_API}food/askAIQuestion`, requestOptions)
+            // var res = await fetch(`http://127.0.0.1:8000/food/askAIQuestion`, requestOptions)
 
             // var data = await res.json();
 
@@ -98,7 +98,6 @@ export default function QuestionsSection({ slug }: { slug: string }) {
                                     />
                                 </div>
                             }
-                            {/* <p>:</p> */}
                             <p className={styles.response}>{question.message}</p>
                         </div>
                     )

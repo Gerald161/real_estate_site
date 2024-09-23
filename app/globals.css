@@ -51,6 +51,12 @@ main{
     align-items: center;
 }
 
+input[type="radio"]{
+    width: 20px;
+    height: 20px;
+    cursor: pointer; 
+}
+
 @media(max-width: 700px){
     nav{
         margin-bottom: 0;

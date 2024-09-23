@@ -127,6 +127,58 @@ export default function ThemeSwitch() {
                             .first_section h2, .first_section h3, .first_section p{
                                 color: white;
                             }
+
+                            .main .filter_results_section .page_numbering_section{
+                                color: white;
+                            }
+
+                            .main .filter_results_section .pagination_container a{
+                                color: white;
+                            }
+
+                            .main .filter_results_section .pagination_container a:hover{
+                                color: black;
+                            }
+
+                            .main .filter_results_section .property_option .property_option_button{
+                                border: solid 1px #ccc;
+                                color: white;
+                            }
+
+                            .main .filter_results_section .property_option .property_option_button:hover{
+                                background-color: white; 
+                                color: black;
+                            }
+
+                            .main .filter_results_section .property_option .selected_option_dropdown{
+                                background-color: #333; 
+                                border-color: #333;
+                            }
+
+                            .main .filter_results_section .property_option .selected_option_dropdown label{
+                                color: white;
+                            }
+
+                            .main .filter_results_section .property_option .selected_option_dropdown p{
+                                color: white;
+                            }
+
+                            .address_search_container input{
+                                background-color: #0f0f0f;
+                                color: white;
+                            }
+
+                            .address_search_container svg{
+                                color: white;
+                            }
+
+                            .address_suggestions{
+                                background-color: #333; 
+                            }
+
+                            .address_suggestions a{
+                                color: white;
+                            }
                         }
                     `
                     }</style>
