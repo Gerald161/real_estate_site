@@ -4,10 +4,11 @@ import Image from "next/image";
 import LogoImage from "../icon.png";
 import LogoImage2 from "../images/logo2.png";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass, faMoon, faCircleUser } from '@fortawesome/free-solid-svg-icons';
+import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
 import SmallScreenButtons from "./SmallScreenButtons";
 import SmallScreenOptions from "./SmallScreenOptions";
 import ThemeSwitch from "./ThemeSwitch";
+import NavBarSearchForm from "./NavBarSearchForm";
 
 
 export default function Navbar() {
@@ -30,10 +31,7 @@ export default function Navbar() {
           <h4>Gold Fern</h4>
         </Link>
 
-        <form method="get" action="/search" className={`${styles.search_box} search_box`}>
-          <input type="text" placeholder="Type your preferred location"/>
-          <FontAwesomeIcon icon={faMagnifyingGlass} />
-        </form>
+        <NavBarSearchForm/>
         
         <div className={styles.third_section}>
             <ThemeSwitch/>

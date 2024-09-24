@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 import usePlacesAutocomplete, {
   getGeocode,
@@ -9,6 +9,7 @@ import usePlacesAutocomplete, {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import "../styles/map.css";
+import { useSearchParams } from 'next/navigation';
 
 export default function Places() {
   const { isLoaded } = useLoadScript({
@@ -48,6 +49,10 @@ type PlacesAutocompleteProps = {
 };
 
 const PlacesAutocomplete: React.FC<PlacesAutocompleteProps> = ({ setSelected, setCenter }) => {
+  const searchParams = useSearchParams();
+ 
+  const search = searchParams.get('location');
+
   const {
     ready,
     value,
@@ -65,6 +70,24 @@ const PlacesAutocomplete: React.FC<PlacesAutocompleteProps> = ({ setSelected, se
     setSelected({ lat, lng });
     setCenter({lat, lng});
   };
+
+  useEffect(()=>{
+    if(search !== null){
+      (async () => {
+        const address = (search.replace(/-/g, " ")) as string
+
+        setValue(address);
+
+        const results = await getGeocode({ address });
+
+        const { lat, lng } = await getLatLng(results[0]);
+
+        setSelected({ lat, lng });
+
+        setCenter({lat, lng});
+     })();
+    }
+  }, [ready])
 
   return (
     <>
