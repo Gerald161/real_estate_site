@@ -12,6 +12,7 @@
     gap: 10px;
     position: sticky;
     top: 0;
+    background: url("../../images/placeholder.png") no-repeat center/cover;
 }
 
 .main .filter_options_section form{
@@ -59,17 +60,43 @@
     padding: 10px;
     border: solid 1px #ccc;
     display: flex;
+    gap: 15px;
     flex-direction: column;
+}
+
+.main .filter_results_section .property_option .selected_option_dropdown .input_container{
+    display: flex; 
+    gap: 5px; 
+    justify-items: center; 
+    align-items: center;
+}
+
+.main .filter_results_section .property_option .selected_option_dropdown .input_container label{
+    width: 100%; 
+    cursor: pointer;
 }
 
 .main .filter_results_section .property_option .selected_option_dropdown select{
     padding: 5px;
+    font-size: 0.9em; 
+    text-align: center;
+}
+
+.main .filter_results_section .property_option .selected_option_dropdown .select_container{
+    display: flex; 
+    justify-content: space-between
+}
+
+.main .filter_results_section .property_option .selected_option_dropdown .select_container .label{
+    display: flex; 
+    flex-direction: column;
+    gap: 5px; 
+    margin: 0 10px 10px 10px;
 }
 
 .main .filter_options_section .filter_section{
     width: 100%;
     flex: 1;
-    background: url("../../images/placeholder.png") no-repeat center/cover;
 }
 
 .main .filter_results_section .search_results{
@@ -93,7 +120,7 @@
 .main .filter_results_section .search_results .search_result .search_result_image_container{
     flex: 9;
     position: relative;
-    background: url("../../images/placeholder.png") no-repeat center/cover;
+    /* background: url("../../images/placeholder.png") no-repeat center/cover; */
     overflow: hidden;
     transition: all 0.8s;
 }

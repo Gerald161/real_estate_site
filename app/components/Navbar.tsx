@@ -30,7 +30,7 @@ export default function Navbar() {
           <h4>Gold Fern</h4>
         </Link>
 
-        <form method="get" action="search.html" className={`${styles.search_box} search_box`}>
+        <form method="get" action="/search" className={`${styles.search_box} search_box`}>
           <input type="text" placeholder="Type your preferred location"/>
           <FontAwesomeIcon icon={faMagnifyingGlass} />
         </form>

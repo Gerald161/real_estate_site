@@ -12,7 +12,7 @@ import "../styles/map.css";
 
 export default function Places() {
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: "",
+    googleMapsApiKey: process.env.NEXT_PUBLIC_KEY as string,
     libraries: ["places"],
   });
 
@@ -35,7 +35,6 @@ function Map() {
         zoom={13}
         center={center}
         mapContainerClassName="map_container"
-        // mapContainerStyle={{height: "100%", width: "100%"}}
       >
         {selected && <Marker position={selected} />}
       </GoogleMap>
