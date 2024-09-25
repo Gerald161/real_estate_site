@@ -12,7 +12,7 @@
     gap: 10px;
     position: sticky;
     top: 0;
-    background: url("../../images/placeholder.png") no-repeat center/cover;
+    /* background: url("../../images/placeholder.png") no-repeat center/cover; */
 }
 
 .main .filter_options_section form{

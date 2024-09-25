@@ -37,7 +37,7 @@ export default function NavBarSearchForm() {
                         placeholder="Type your preferred location"
                         onChange={(e)=> setValue(e.target.value)} 
                         value={value}
-                        disabled={!ready}
+                        disabled={!isLoaded}
                     />
                     <FontAwesomeIcon icon={faMagnifyingGlass} />
                     
