@@ -179,6 +179,36 @@ export default function ThemeSwitch() {
                             .address_suggestions a{
                                 color: white;
                             }
+
+                            .questionSection, .questionSection .message_content_section .chat_window{
+                                background-color: #333;
+                                color: white;
+                            }
+
+                            .questionSection h2{
+                                color: white;
+                            }
+
+                            .message{
+                                background: #333;
+                                color: white;
+                            }
+
+                            .output .profile_pic2{
+                                background: white;
+                            }
+
+                            .ai_chat_button{
+                                background: white;
+                            }
+
+                            .response, .output .profile_pic{
+                                background: #444444;
+                            }
+
+                            .ai_button_container p{
+                                background: #333;
+                            }
                         }
                     `
                     }</style>

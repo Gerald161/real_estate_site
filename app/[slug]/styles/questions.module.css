@@ -16,7 +16,7 @@
 
 .ai_button_container p{
     position: absolute;
-    right: 80px;
+    right: 60px;
     width: 80px;
     text-align: center;
     color: white;
@@ -32,8 +32,8 @@
 
 .ai_chat_button{
     position: relative;
-    width: 75px;
-    height: 75px;
+    width: 55px;
+    height: 55px;
     border-radius: 100%;
     border: #cccccc87 solid 2px;
     cursor: pointer;
@@ -42,7 +42,7 @@
 }
 
 .ai_chat_button:hover{
-    background: rgba(0,0,0,0.3);
+    background-color: #ccc;
 }
 
 .ai_chat_button img{
@@ -56,10 +56,9 @@
 .questionSection{
     position: absolute;
     right: 2px;
-    bottom: 85px;
+    bottom: 65px;
     margin-left: auto;
 	width: 330px;
-	border: 1px solid #ddd;
 	box-shadow: 1px 3px 5px rgba(0,0,0,0.05);
 	border-radius: 2px;
     z-index: 20000;
@@ -93,23 +92,26 @@
 
 .output .profile_container{
     display: flex;
-    gap: 2px;
-    padding: 14px 0px;
+    gap: 5px;
+    padding: 10px 0;
     margin: 0 20px;
-    border-bottom: 1px solid #e9e9e9;
-    color: #555;
 }
 
 .response{
     width: 80%;
     overflow-wrap: break-word;
+    background: #EAEAEA;
+    padding: 10px;
+    border-radius: 10px;
 }
 
 .output .profile_pic{
-    width: 35px;
-    height: 35px;
-    border-radius: 100%;
-    background: url("../../images/logo.png") no-repeat center/cover;
+    width: 80%;
+    overflow-wrap: break-word;
+    background: #EAEAEA;
+    padding: 10px;
+    border-radius: 10px;
+    margin-left: auto;
 }
 
 .output .profile_pic2{
@@ -128,33 +130,31 @@
 
 .message_compose_section{
     display: flex;
-    flex-direction: column;
 	flex: 1;
     padding: 20px;
-    gap: 5px;
+    gap: 7px;
+    align-items: center;
+    font-size: 22px;
 }
 
 .message{
-    flex: 1;
     padding: 5px 10px;
-    box-sizing: border-box;
-    background: #eee;
-    border: 0;
-    display: block;
+    border: none;
+    border: solid 1px #ccc;
+    border-radius: 15px;
     width: 100%;
     background: #fff;
-    border-bottom: 1px solid #eee;
-    font-family: Nunito;
-    font-size: 16px;
+}
+
+.message:focus{
+    outline: none;
+    border: solid 1px dodgerblue;
 }
 
 .send{
-    background: #575ed8;
-    color: #fff;
-    font-size: 18px;
+    color: #575ed8;
+    font-size: 22px;
     border: 0;
     cursor: pointer;
-    padding: 5px 0;
-    width: 100%;
-    border-radius: 0 0 2px 2px;
+    background-color: transparent;
 }

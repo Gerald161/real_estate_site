@@ -3,6 +3,9 @@ import { useState, useRef } from 'react';
 import styles from "../styles/questions.module.css";
 import Image from 'next/image';
 import profileImg from "../../images/1.jpg";
+import chatBotImg from "../../images/chatbot.png";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPaperclip, faPaperPlane, faXmark } from '@fortawesome/free-solid-svg-icons';
 
 interface QuestionResponses {
     role: string;
@@ -63,6 +66,10 @@ export default function QuestionsSection({ slug }: { slug: string }) {
 
             // oldQuestions.push({"role": "assistant", "message": data["response"]})
 
+            // returning static response here please delete
+              oldQuestions.push({"role": "assistant", "message": "Wonderfully returned message"})
+            // static response ends here
+
             setQuestionsAsked(oldQuestions);
 
             // chatlog.current.push({"role": "assistant", "content": data["response"]});
@@ -72,13 +79,13 @@ export default function QuestionsSection({ slug }: { slug: string }) {
     }
 
     return (
-        <div className={styles.chat_and_ai_button_container}>
-        <div ref={questionSectionRef} className={styles.questionSection}>
-          <h2>AI Assistant</h2>
+      <div className={styles.chat_and_ai_button_container}>
+        <div ref={questionSectionRef} className={`${styles.questionSection} questionSection`}>
+          <h2 style={{textAlign: "center"}}>AI Assistant</h2>
 
-          <form onSubmit={(e)=>{askAiQuestion(e)}} method='post' className={styles.message_content_section}>
-            <div className={styles.chat_window}>
-              <div className={styles.output}>
+          <form onSubmit={(e)=>{askAiQuestion(e)}} method='post' className={`${styles.message_content_section} message_content_section`}>
+            <div className={`${styles.chat_window} chat_window`}>
+              <div className={`${styles.output} output`}>
                 {
                     questionsAsked.length == 0 ?
                     <p className={styles.no_question}>Please ask any question to our helpful assistant</p>
@@ -86,19 +93,23 @@ export default function QuestionsSection({ slug }: { slug: string }) {
                     questionsAsked.map((question, index)=>
                         <div key={index} className={styles.profile_container}>
                             {
-                                question.role !== "user" ?
-                                <div className={styles.profile_pic}></div>
-                                :
-                                <div className={styles.profile_pic2}>
-                                    <Image
-                                      src={profileImg}
-                                      alt='Profile Image'
-                                      height={100}
-                                      width={100}
-                                    />
+                                question.role === "user" ?
+                                <div className={`${styles.profile_pic} profile_pic`}>
+                                  {question.message}
                                 </div>
+                                :
+                                <>
+                                  <div className={`${styles.profile_pic2} profile_pic2`}>
+                                      <Image
+                                        src={chatBotImg}
+                                        alt='Profile Image'
+                                        height={100}
+                                        width={100}
+                                      />
+                                  </div>
+                                  <p className={`${styles.response} response`}>{question.message}</p>
+                                </>
                             }
-                            <p className={styles.response}>{question.message}</p>
                         </div>
                     )
                 }
@@ -110,13 +121,16 @@ export default function QuestionsSection({ slug }: { slug: string }) {
             </div>
 
             <div className={styles.message_compose_section}>
-              <input value={aiQuestion} onChange={(e)=>{setAiQuestion(e.target.value)}} className={styles.message} type="text" placeholder={`Ask about ${slug.split("-")[0]}`} />
-              <button className={styles.send}>Send</button>
+              <FontAwesomeIcon icon={faPaperclip} style={{cursor: "pointer"}}/>
+              <input value={aiQuestion} onChange={(e)=>{setAiQuestion(e.target.value)}} className={`${styles.message} message`} type="text" placeholder="Ask about property"/>
+              <button className={styles.send}>
+                <FontAwesomeIcon icon={faPaperPlane} />
+              </button>
             </div>
           </form>
         </div>
 
-        <div className={styles.ai_button_container}>
+        <div className={`${styles.ai_button_container} ai_button_container`}>
           <p>AI Chat</p>
           <div onClick={(e)=>{
             if(questionSectionRef.current!.style.display == "none" || questionSectionRef.current!.style.display == ""){
@@ -124,9 +138,9 @@ export default function QuestionsSection({ slug }: { slug: string }) {
             }else{
               questionSectionRef.current!.style.display = "none";
             }
-          }} className={styles.ai_chat_button}>
+          }} className={`${styles.ai_chat_button} ai_chat_button`}>
             <Image
-              src={profileImg}
+              src={chatBotImg}
               alt='Chat Logo'
               height={100}
               width={100}

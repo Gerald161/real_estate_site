@@ -21,51 +21,51 @@ export default function NavBarSearchForm() {
         suggestions: { status, data },
         clearSuggestions,
       } = usePlacesAutocomplete();
-    
-      const handleSelect = async (address: string) => {
-        setValue(address, false);
 
-        clearSuggestions();
-      };
+    return (
+        <>
+            <form method="get" action="/search?location=" className={`${styles.search_box} search_box`}>
+                <input 
+                    type="text" 
+                    placeholder="Type your preferred location"
+                    onChange={(e)=> setValue(e.target.value)} 
+                    value={value}
+                    disabled={!isLoaded}
+                />
 
-    if(isLoaded){
-        return (
-            <>
-                <form method="get" action="/search?location=" className={`${styles.search_box} search_box`}>
-                    <input 
-                        type="text" 
-                        placeholder="Type your preferred location"
-                        onChange={(e)=> setValue(e.target.value)} 
-                        value={value}
-                        disabled={!isLoaded}
-                    />
-                    <FontAwesomeIcon icon={faMagnifyingGlass} />
-                    
-                    <div 
-                        className={`address_suggestions ${data.length !== 0 && "show_border"}`}
-                        style={{
-                            top: "35px",
-                            left: "5px"
-                        }}
-                    >
-                    {
-                        status === "OK" && 
-                        data.map(({place_id, description})=>(
-                            <Link key={place_id} href={`/search?location=${description.replace(/ /g, "-")}`}>{description}</Link>
-                        ))
-                    }
-                    </div>
-                </form>
-            </>
-        )
-    }else{
-        <form method="get" action="/search" className={`${styles.search_box} search_box`}>
-          <input 
-            type="text" 
-            placeholder="Type your preferred location"
-            onChange={(e)=> setValue(e.target.value)}
-            />
-          <FontAwesomeIcon icon={faMagnifyingGlass} />
-        </form>
-    }
+                <FontAwesomeIcon icon={faMagnifyingGlass} />
+
+                <FontAwesomeIcon 
+                    style={{
+                        position: "absolute",
+                        width: "22px",
+                        height: "22px",
+                        top: "17%",
+                        right: "10px",
+                        cursor: "pointer"
+                    }}
+                    onClick={()=>{
+                        setValue("");
+                        clearSuggestions();
+                    }} 
+                    icon={faXmark} 
+                />
+                
+                <div 
+                    className={`address_suggestions ${data.length !== 0 && "show_border"}`}
+                    style={{
+                        top: "35px",
+                        left: "5px"
+                    }}
+                >
+                {
+                    status === "OK" && 
+                    data.map(({place_id, description})=>(
+                        <Link key={place_id} href={`/search?location=${description.replace(/ /g, "-")}`}>{description}</Link>
+                    ))
+                }
+                </div>
+            </form>
+        </>
+    )
 }

@@ -31,7 +31,7 @@ export default function Navbar() {
           <h4>Gold Fern</h4>
         </Link>
 
-        <NavBarSearchForm/>
+        {/* <NavBarSearchForm/> */}
         
         <div className={styles.third_section}>
             <ThemeSwitch/>
