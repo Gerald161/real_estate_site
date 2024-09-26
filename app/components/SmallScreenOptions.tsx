@@ -19,8 +19,8 @@ export default function SmallScreenOptions() {
             <FontAwesomeIcon onClick={()=>{closeOptions()}} icon={faTimes} className={`${styles.close_button} close_button`}/>
 
             <div style={{display: "flex",  width: "100%", flexDirection: "column"}}>
-                <Link href="#" style={{textAlign: "center"}}>Home</Link>
                 <Link href="#" style={{textAlign: "center"}}>Sign in</Link>
+                <Link href="#" style={{textAlign: "center"}}>Wish List</Link>
                 <Link href="#" style={{textAlign: "center"}}>Services</Link>
                 <Link href="#" style={{textAlign: "center"}}>Contact</Link>
             </div>

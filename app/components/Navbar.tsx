@@ -4,7 +4,7 @@ import Image from "next/image";
 import LogoImage from "../icon.png";
 import LogoImage2 from "../images/logo2.png";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
+import { faCircleUser, faHeart } from '@fortawesome/free-solid-svg-icons';
 import SmallScreenButtons from "./SmallScreenButtons";
 import SmallScreenOptions from "./SmallScreenOptions";
 import ThemeSwitch from "./ThemeSwitch";
@@ -34,11 +34,17 @@ export default function Navbar() {
         {/* <NavBarSearchForm/> */}
         
         <div className={styles.third_section}>
-            <ThemeSwitch/>
-            <Link href="#" className={`${styles.options} options`}>
-              <FontAwesomeIcon icon={faCircleUser} />
-              <p>Sign In</p>
-            </Link>
+          <Link href="#" className={`${styles.options} options`}>
+            <FontAwesomeIcon icon={faHeart}/>
+            <p>Wish List</p>
+          </Link>
+
+          <ThemeSwitch/>
+
+          <Link href="#" className={`${styles.options} options`}>
+            <FontAwesomeIcon icon={faCircleUser} />
+            <p>Sign In</p>
+          </Link>
         </div>
 
         <SmallScreenButtons/>

@@ -9,6 +9,7 @@ import { useState, useRef, useEffect } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import QuestionsSection from "./components/QuestionsSection";
+import LocalMap from "./components/LocalMap";
 
 export default function HouseDetailsPage() {
     const allImages = [img, img2, img3, img2, img3];
@@ -178,7 +179,11 @@ export default function HouseDetailsPage() {
 
                 <p style={{margin: "20px", textAlign: "center"}}><span style={{fontWeight: "bold"}}>2</span> bed | <span style={{fontWeight: "bold"}}>2</span> bath | <span style={{fontWeight: "bold"}}>1,402</span> sqft</p>
 
-                <p style={{textAlign: "center"}}><FontAwesomeIcon icon={faLocationDot} /> 41 SE 5th St Apt 1608, Miami, FL 33131</p>
+                <h2 style={{textAlign: "center"}}>Map & Location</h2>
+
+                <p style={{textAlign: "center", margin: "20px"}}><FontAwesomeIcon icon={faLocationDot} /> 41 SE 5th St Apt 1608, Miami, FL 33131</p>
+
+                <LocalMap/>
 
                 <div style={{display: "flex", justifyContent: "center", alignItems: "center", margin: "20px"}}>
                     <button className={styles.order_button}>Add to WishList</button>
