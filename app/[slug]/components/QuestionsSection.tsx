@@ -18,7 +18,7 @@ export default function QuestionsSection({ slug }: { slug: string }) {
     const chatlog = useRef([
         {
             "role": "system", 
-            "content": `You are a helpful assistant that answers questions about Housing in a Real Estate Website`,
+            "content": `You are a helpful assistant that answers questions about Housing in a Real Estate Website, and please keep your answers concise and short`,
         },
     ])
 
@@ -27,54 +27,84 @@ export default function QuestionsSection({ slug }: { slug: string }) {
     const [questionsAsked, setQuestionsAsked] = useState<QuestionResponses[]>([]);
 
     const [answerLoading, setAnswerLoading] = useState(false);
+
+    const [aiTypyResponse, setAiTypyResponse] = useState("last message of AI");
+
+    const [responseComplete, setResponseComplete] = useState(true);
+
+    function dynamicallyTypeAiResponse(letter: string, index: number=0, lastIndex: number){
+      setTimeout(() => {
+        if(letter !== "*"){
+          setAiTypyResponse((prevResponse)=>
+            prevResponse += letter
+          )
+        }
+
+        if(index == lastIndex){
+          setResponseComplete(true);
+        }
+      }, 50 * index);
+    }
   
     const askAiQuestion = async (e: React.FormEvent<HTMLElement>) => {
         e.preventDefault();
 
+        setResponseComplete(false);
+
         if(aiQuestion !== ""){
-            setAnswerLoading(true);
+          setAnswerLoading(true);
 
-            var previous_question = aiQuestion;
+          var previous_question = aiQuestion;
 
-            setAiQuestion("");
+          setAiQuestion("");
 
-            var oldQuestions = [...questionsAsked];
+          setAiTypyResponse("");
 
-            oldQuestions.push({"role": "user", "message": previous_question});
+          var oldQuestions = [...questionsAsked];
+
+          oldQuestions.push({"role": "user", "message": previous_question});
+
+          setQuestionsAsked(oldQuestions);
+
+          var myHeaders = new Headers();
+
+          myHeaders.append("Authorization", `Token ${process.env.NEXT_PUBLIC_TOKEN}`);
+
+          var formdata = new FormData();
+          
+          chatlog.current.push({"role": "user", "content": previous_question});
+
+          formdata.append("question", JSON.stringify(chatlog.current));
+
+          var requestOptions = {
+              method: 'POST',
+              headers: myHeaders,
+              body: formdata,
+          };
+
+          var res = await fetch(`http://127.0.0.1:8000/food/askAIQuestion`, requestOptions);
+
+          if(res.ok){
+            var data = await res.json();
+
+            oldQuestions.push({"role": "assistant", "message": data["response"]})
 
             setQuestionsAsked(oldQuestions);
 
-            var myHeaders = new Headers();
-
-            // myHeaders.append("Authorization", `Token ${process.env.NEXT_PUBLIC_TOKEN}`);
-
-            var formdata = new FormData();
-            
-            chatlog.current.push({"role": "user", "content": previous_question});
-
-            formdata.append("question", JSON.stringify(chatlog.current));
-
-            var requestOptions = {
-                method: 'GET',
-                headers: myHeaders,
-                body: formdata,
-            };
-
-            // var res = await fetch(`http://127.0.0.1:8000/food/askAIQuestion`, requestOptions)
-
-            // var data = await res.json();
-
-            // oldQuestions.push({"role": "assistant", "message": data["response"]})
-
-            // returning static response here please delete
-              oldQuestions.push({"role": "assistant", "message": "Wonderfully returned message"})
-            // static response ends here
-
-            setQuestionsAsked(oldQuestions);
-
-            // chatlog.current.push({"role": "assistant", "content": data["response"]});
+            chatlog.current.push({"role": "assistant", "content": data["response"]});
 
             setAnswerLoading(false);
+
+            for(var i = 0; i < oldQuestions[oldQuestions.length - 1].message.length; i ++){
+              dynamicallyTypeAiResponse(oldQuestions[oldQuestions.length - 1].message[i], i, oldQuestions[oldQuestions.length- 1].message.length - 1)
+            }
+          }else{
+            setAnswerLoading(false);
+
+            setResponseComplete(true);
+
+            alert("An error occurced, please try again");
+          }
         }
     }
 
@@ -83,7 +113,15 @@ export default function QuestionsSection({ slug }: { slug: string }) {
         <div ref={questionSectionRef} className={`${styles.questionSection} questionSection`}>
           <h2 style={{textAlign: "center"}}>AI Assistant</h2>
 
-          <form onSubmit={(e)=>{askAiQuestion(e)}} method='post' className={`${styles.message_content_section} message_content_section`}>
+          <form onSubmit={(e)=>{
+              askAiQuestion(e).catch((e)=>{
+                setAnswerLoading(false);
+
+                setResponseComplete(true);
+
+                alert("An error occurced, please try again");
+              })
+            }} method='post' className={`${styles.message_content_section} message_content_section`}>
             <div className={`${styles.chat_window} chat_window`}>
               <div className={`${styles.output} output`}>
                 {
@@ -107,7 +145,26 @@ export default function QuestionsSection({ slug }: { slug: string }) {
                                         width={100}
                                       />
                                   </div>
-                                  <p className={`${styles.response} response`}>{question.message}</p>
+
+                                  
+                                  {
+                                    questionsAsked.length - 1 !== index ?
+                                    <p className={`${styles.response} response`}>
+                                    {
+                                      question.message
+                                    }
+                                    </p> :
+                                    <p className={`${styles.response} response`}>
+                                    {
+                                      aiTypyResponse
+                                    }
+                                    <span className={`${
+                                      !responseComplete ? styles.response2
+                                      : ""
+                                    }`}></span>
+                                    </p>
+                                  }
+                                  
                                 </>
                             }
                         </div>
@@ -115,14 +172,14 @@ export default function QuestionsSection({ slug }: { slug: string }) {
                 }
                 {
                     answerLoading == true &&
-                    <p className={styles.no_question}>Please wait...</p>
+                    <p className={styles.no_question}>Generating response...</p>
                 }
               </div>
             </div>
 
             <div className={styles.message_compose_section}>
               <FontAwesomeIcon icon={faPaperclip} style={{cursor: "pointer"}}/>
-              <input value={aiQuestion} onChange={(e)=>{setAiQuestion(e.target.value)}} className={`${styles.message} message`} type="text" placeholder="Ask about property"/>
+              <input disabled={!responseComplete} value={aiQuestion} onChange={(e)=>{setAiQuestion(e.target.value)}} className={`${styles.message} message`} type="text" placeholder="Ask about property"/>
               <button className={styles.send}>
                 <FontAwesomeIcon icon={faPaperPlane} />
               </button>

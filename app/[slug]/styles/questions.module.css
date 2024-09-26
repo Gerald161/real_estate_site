@@ -58,7 +58,7 @@
     right: 2px;
     bottom: 65px;
     margin-left: auto;
-	width: 330px;
+	width: 400px;
 	box-shadow: 1px 3px 5px rgba(0,0,0,0.05);
 	border-radius: 2px;
     z-index: 20000;
@@ -103,6 +103,18 @@
     background: #EAEAEA;
     padding: 10px;
     border-radius: 10px;
+}
+
+.response2{
+    padding-left: 3px;
+    animation: blink .5s step-end infinite alternate;
+    border-right: 2px solid;
+}
+
+@keyframes blink {
+    50% {
+        border-color: transparent
+    }
 }
 
 .output .profile_pic{
