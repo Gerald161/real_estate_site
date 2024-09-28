@@ -2,7 +2,7 @@ import styles from "./styles/navbar.module.css";
 import Link from "next/link";
 import Image from "next/image";
 import LogoImage from "../icon.png";
-import LogoImage2 from "../images/logo2.png";
+import LogoImage2 from "../images/logo.png";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleUser, faHeart } from '@fortawesome/free-solid-svg-icons';
 import SmallScreenButtons from "./SmallScreenButtons";
@@ -17,13 +17,13 @@ export default function Navbar() {
       <nav>
         <Link href="/" className={`${styles.logo} logo`}>
           <Image
-            src={LogoImage}
+            src={LogoImage2}
             alt="Logo Image"
             placeholder="blur"
             quality={40}
           />
           <Image
-            src={LogoImage2}
+            src={LogoImage}
             alt="Logo Image"
             placeholder="blur"
             quality={40}
@@ -31,7 +31,7 @@ export default function Navbar() {
           <h4>Gold Fern</h4>
         </Link>
 
-        {/* <NavBarSearchForm/> */}
+        <NavBarSearchForm/>
         
         <div className={styles.third_section}>
           <Link href="#" className={`${styles.options} options`}>

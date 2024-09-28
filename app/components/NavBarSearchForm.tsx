@@ -7,6 +7,7 @@ import "../search/styles/map.css";
 import { useLoadScript } from "@react-google-maps/api";
 import usePlacesAutocomplete from "use-places-autocomplete";
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 export default function NavBarSearchForm() {
     const { isLoaded } = useLoadScript({
@@ -14,23 +15,41 @@ export default function NavBarSearchForm() {
         libraries: ["places"],
     });
 
+    if(!isLoaded){
+        return <div style={{padding: "20px"}}>Loading...</div>;
+    }else{
+        return <NavAutoSearch/>;
+    }
+}
+
+function NavAutoSearch(){
     const {
         ready,
         value,
         setValue,
         suggestions: { status, data },
         clearSuggestions,
-      } = usePlacesAutocomplete();
+    } = usePlacesAutocomplete();
+
+    const router = useRouter();
 
     return (
         <>
-            <form method="get" action="/search?location=" className={`${styles.search_box} search_box`}>
+            <form 
+                method="get" 
+                action="/search?location=" 
+                className={`${styles.search_box} search_box`}
+                onSubmit={(e)=>{
+                    e.preventDefault()
+                    router.push(`/search?location=${value.replace(/ /g, "-")}`)
+                }}
+                >
                 <input 
                     type="text" 
                     placeholder="Type your preferred location"
                     onChange={(e)=> setValue(e.target.value)} 
                     value={value}
-                    disabled={!isLoaded}
+                    disabled={!ready}
                 />
 
                 <FontAwesomeIcon icon={faMagnifyingGlass} />

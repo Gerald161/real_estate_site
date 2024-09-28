@@ -9,44 +9,14 @@ import Image from "next/image";
 import Img2 from "../../images/hotel.jpg";
 import Img3 from "../../images/2.jpg";
 import Link from "next/link";
+import { featuredHomes } from "@/app/page";
 
 export default function SearchResultsPage() {
   const [saleOptionsOpened, setSaleOptionsOpened] = useState(false);
 
   const [priceOptionsOpened, setPriceOptionsOpened] = useState(false);
 
-  const featuredHomes = [
-    {
-
-    },
-    {
-
-    },
-    {
-
-    },
-    {
-
-    },
-    {
-
-    },
-    {
-
-    },
-    {
-
-    },
-    {
-
-    },
-    {
-
-    },
-    {
-
-    },
-  ];
+  const [chosenPropertyOption, setChosenPropertyOption] = useState(0)
 
   return (
     <div className={`${styles.filter_results_section} filter_results_section`}>
@@ -68,15 +38,42 @@ export default function SearchResultsPage() {
             saleOptionsOpened && (
               <div className={`${styles.selected_option_dropdown} selected_option_dropdown`}>
                 <div className={styles.input_container}>
-                  <input type="radio" id="sale" name="type_of_property" value="sale"/>
+                  <input 
+                    type="radio" 
+                    id="sale" 
+                    checked={chosenPropertyOption == 0} 
+                    name="type_of_property" 
+                    value="sale"
+                    onChange={(e)=>{
+                      setChosenPropertyOption(0)
+                    }}
+                  />
                   <label htmlFor="sale">For Sale</label>
                 </div>
                 <div className={styles.input_container}>
-                  <input type="radio" id="rent" name="type_of_property" value="rent"/>
+                  <input 
+                    type="radio" 
+                    id="rent" 
+                    checked={chosenPropertyOption == 1} 
+                    name="type_of_property" 
+                    value="rent"
+                    onChange={(e)=>{
+                      setChosenPropertyOption(1)
+                    }}
+                  />
                   <label htmlFor="rent">For Rent</label>
                 </div>
                 <div className={styles.input_container}>
-                  <input type="radio" id="lease" name="type_of_property" value="lease"/>
+                  <input 
+                    type="radio" 
+                    id="lease" 
+                    checked={chosenPropertyOption == 2} 
+                    name="type_of_property" 
+                    value="lease"
+                    onChange={(e)=>{
+                      setChosenPropertyOption(2)
+                    }}
+                  />
                   <label htmlFor="lease">Lease</label>
                 </div>
               </div>
@@ -107,12 +104,13 @@ export default function SearchResultsPage() {
                     <p>Minimum</p>
       
                     <select style={{fontSize: "0.9em", textAlign: "center"}} name="minimum">
-                      <option value="500">$500</option>
-                      <option value="1000">$1000</option>
-                      <option value="1500">$1500</option>
-                      <option value="10000">$10000</option>
-                      <option value="50000">$50000</option>
-                      <option value="10000">$10000</option>
+                      <option value="">No Min</option>
+                      <option value="100000">$100,000</option>
+                      <option value="150000">$150,000</option>
+                      <option value="200000">$200,000</option>
+                      <option value="250000">$250,000</option>
+                      <option value="300000">$300,000</option>
+                      <option value="350000">$350,000</option>
                     </select>
                   </div>
       
@@ -120,12 +118,13 @@ export default function SearchResultsPage() {
                     <p>Maximum</p>
       
                     <select name="maximum">
-                      <option value="500">$500</option>
-                      <option value="1000">$1000</option>
-                      <option value="1500">$1500</option>
-                      <option value="10000">$10000</option>
-                      <option value="50000">$50000</option>
-                      <option value="10000">$10000</option>
+                      <option value="">No Max</option>
+                      <option value="150000">$150,000</option>
+                      <option value="200000">$200,000</option>
+                      <option value="250000">$250,000</option>
+                      <option value="300,000">$300,000</option>
+                      <option value="350,000">$350,000</option>
+                      <option value="400000+">$400,000+</option>
                     </select>
                   </div>
                 </div>
@@ -141,26 +140,26 @@ export default function SearchResultsPage() {
             <div key={index} className={`${styles.search_result} search_result`}>
               <Link href="/product" className={styles.search_result_image_container}>
                 <Image
-                  src={Img2}
+                  src={home.img1}
                   alt="Lobby Image 2"
                   placeholder="blur"
                   quality={40}
                 />
                 <Image
-                  src={Img3}
+                  src={home.img2}
                   alt="Lobby Image 2"
                   placeholder="blur"
                   quality={40}
                 />
                 <div className={styles.image_overlay_info}>
-                  <p>6 days ago</p>
+                  <p>{home.time_posted} days ago</p>
                 </div>
               </Link>
-              <h3>$450,000</h3>
+              <h3>${home.price}</h3>
               
               <div className={`${styles.bottom_section} bottom_section`}>
-                <p><span style={{fontWeight: "bold"}}>3</span> beds | <span style={{fontWeight: "bold"}}>2</span>ba | <span style={{fontWeight: "bold"}}>912</span> sqft - House for Sale</p>
-                <p><FontAwesomeIcon icon={faLocationDot} /> 206 Watson Rd, North Syracuse, NY 13212</p>
+                <p><span style={{fontWeight: "bold"}}>{home.bed}</span> beds | <span style={{fontWeight: "bold"}}>{home.bath}</span> ba | <span style={{fontWeight: "bold"}}>{home.sqft}</span> sqft - House for Sale</p>
+                <p><FontAwesomeIcon icon={faLocationDot} />{home.address}</p>
               </div>
             </div>
           )

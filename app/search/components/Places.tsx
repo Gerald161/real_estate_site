@@ -110,7 +110,10 @@ const PlacesAutocomplete: React.FC<PlacesAutocompleteProps> = ({ setSelected, se
       {
         status === "OK" && 
         data.map(({place_id, description})=>(
-          <a key={place_id} href="#" onClick={(e)=>{handleSelect(description)}}>{description}</a>
+          <a key={place_id} href="" onClick={(e)=>{
+            e.preventDefault()
+            handleSelect(description)
+          }}>{description}</a>
         ))
       }
       </div>
