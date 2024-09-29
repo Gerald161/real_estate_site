@@ -155,7 +155,7 @@ export default function SearchResultsPage() {
               <h3>${home.price}</h3>
               
               <div className={`${styles.bottom_section} bottom_section`}>
-                <p><span style={{fontWeight: "bold"}}>{home.bed}</span> beds | <span style={{fontWeight: "bold"}}>{home.bath}</span> ba | <span style={{fontWeight: "bold"}}>{home.sqft}</span> sqft - House for Sale</p>
+                <p><span style={{fontWeight: "bold"}}>{home.bed}</span> beds | <span style={{fontWeight: "bold"}}>{home.bath}</span> ba | <span style={{fontWeight: "bold"}}>{home.sqft}</span> sqft - {home.description}</p>
                 <p><FontAwesomeIcon icon={faLocationDot} />{home.address}</p>
               </div>
             </div>
