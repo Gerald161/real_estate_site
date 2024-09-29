@@ -80,7 +80,14 @@ function NavAutoSearch(){
                 {
                     status === "OK" && 
                     data.map(({place_id, description})=>(
-                        <Link key={place_id} href={`/search?location=${description.replace(/ /g, "-")}`}>{description}</Link>
+                        <Link key={place_id}
+                        onClick={(e)=>{
+                            setValue("");
+                            clearSuggestions();
+                        }}
+                         href={`/search?location=${description.replace(/ /g, "-")}`}
+                        >{description}
+                        </Link>
                     ))
                 }
                 </div>

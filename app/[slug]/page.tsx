@@ -1,19 +1,16 @@
 "use client"
 
 import styles from "./styles/houseDetailsPage.module.css";
-import img from "../images/1.jpg";
-import img2 from "../images/2.jpg";
-import img3 from "../images/3.jpg";
 import Image from "next/image";
 import { useState, useRef, useEffect } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import QuestionsSection from "./components/QuestionsSection";
 import LocalMap from "./components/LocalMap";
+import { featuredHomes } from "../page";
+import { notFound } from "next/navigation";
 
-export default function HouseDetailsPage() {
-    const allImages = [img, img2, img3, img2, img3];
-
+export default function HouseDetailsPage({ params }: { params: { slug: string }}) {
     const [selectedIndex, setSelectedIndex] = useState(0);
 
     const sliderRef = useRef<HTMLDivElement | null>(null);
@@ -21,6 +18,8 @@ export default function HouseDetailsPage() {
     const slideValueResized = useRef<string | undefined>("0");
 
     const slideValue = useRef<string | undefined>("0");
+
+    const propertyIndex = useRef((parseInt(params.slug.split("-")[1]) - 1))
 
     function slideImage(e: React.MouseEvent<HTMLElement>, index: number){
         setSelectedIndex(index);
@@ -44,10 +43,11 @@ export default function HouseDetailsPage() {
     }
 
     function slideRight(e: React.MouseEvent<HTMLElement>){
-        if(selectedIndex === allImages.length - 1){
+        if(selectedIndex === featuredHomes[propertyIndex.current].carousel_images.length - 1){
             sliderRef.current!.style.transition = 'unset';
             sliderRef.current!.animate([{opacity:'0.2'},{opacity:"1.0"}],{duration:500,fill:'forwards'});
             sliderRef.current!.style.left = `0vw`;
+            slideValue.current = "0";
             setSelectedIndex(0);
         }else{
             sliderRef.current!.style.transition = 'all 0.7s';
@@ -73,12 +73,14 @@ export default function HouseDetailsPage() {
             sliderRef.current!.style.transition = 'unset';
             sliderRef.current!.animate([{opacity:'0.2'},{opacity:"1.0"}],{duration:500,fill:'forwards'});
             if(window.innerWidth <= 700){
-                sliderRef.current!.style.left = `-${(allImages.length - 1) * 100}vw`;
+                sliderRef.current!.style.left = `-${(featuredHomes[propertyIndex.current].carousel_images.length - 1) * 100}vw`;
+                slideValue.current = ((featuredHomes[propertyIndex.current].carousel_images.length - 1) * 100 ).toString();
             }else{
-                sliderRef.current!.style.left = `-${(allImages.length - 1) * 70}vw`;
+                sliderRef.current!.style.left = `-${(featuredHomes[propertyIndex.current].carousel_images.length - 1) * 70}vw`;
+                slideValue.current = ((featuredHomes[propertyIndex.current].carousel_images.length - 1) * 70 ).toString();
             }
             
-            setSelectedIndex(allImages.length - 1);
+            setSelectedIndex(featuredHomes[propertyIndex.current].carousel_images.length - 1);
         }else{
             sliderRef.current!.style.transition = 'all 0.7s';
 
@@ -112,85 +114,92 @@ export default function HouseDetailsPage() {
         if(sliderRef.current !== null){
           window.addEventListener('resize', handleResize);
         }
-      },[])
+    },[])
 
-    return (
-        <main>
-            <div className={`${styles.first_section} first_section`}>
-                <div className={styles.first}>
-                    <div className={styles.slider} ref={sliderRef}>
-                        {
-                            allImages.map((image,index)=>(
-                                <div key={index} 
-                                    className={styles.img}
-                                >
-                                <Image
-                                    src={image}
-                                    alt="Placeholder Image"
-                                    placeholder="blur"
-                                    quality={100}
-                                />
-                                </div>
-                            ))
-                        }
-                    </div>
-
-                    <a className={styles.prev}
-                        onClick={(e)=>{
-                            slideLeft(e);
-                        }}
-                    >&#10094;
-                    </a>
-                    <a className={styles.next}
-                        onClick={(e)=>{
-                            slideRight(e);
-                        }}
-                    >&#10095;
-                    </a> 
-                </div>
-
-                <div className={`${styles.extra_info} extra_info`}>
-                    <h3>Apartment for sale</h3>
-
-                    <div className={styles.additional_images}>
-                        {
-                            allImages.map((image, index)=>(
-                                <div key={index} 
-                                    className={styles.additional_image}
-                                    onClick={
-                                        (e)=>{slideImage(e, index)}
-                                    }
-                                >
+    if((parseInt(params.slug.split("-")[1])) > featuredHomes.length){
+        notFound()
+    }else{
+        return (
+            <main>
+                <div className={`${styles.first_section} first_section`}>
+                    <div className={styles.first}>
+                        <div className={styles.slider} ref={sliderRef}>
+                            {
+                                featuredHomes[propertyIndex.current].carousel_images.map((image,index)=>(
+                                    <div key={index} 
+                                        className={styles.img}
+                                    >
                                     <Image
                                         src={image}
-                                        alt="Welcome Image 1"
+                                        alt="Placeholder Image"
                                         placeholder="blur"
-                                        quality={30}
-                                        className={index !== selectedIndex ? styles.inactive : ""}
-                                        data-left={index * 70} data-left2={index * 100} 
+                                        quality={100}
                                     />
-                                </div>
-                            ))
-                        }
+                                    </div>
+                                ))
+                            }
+                        </div>
+    
+                        <a className={styles.prev}
+                            onClick={(e)=>{
+                                slideLeft(e);
+                            }}
+                        >&#10094;
+                        </a>
+                        <a className={styles.next}
+                            onClick={(e)=>{
+                                slideRight(e);
+                            }}
+                        >&#10095;
+                        </a> 
+                    </div>
+    
+                    <div className={`${styles.extra_info} extra_info`}>
+                        <h3>{featuredHomes[propertyIndex.current].description}</h3>
+    
+                        <div className={styles.additional_images}>
+                            {
+                                featuredHomes[propertyIndex.current].carousel_images.map((image, index)=>(
+                                    <div key={index} 
+                                        className={styles.additional_image}
+                                        onClick={
+                                            (e)=>{slideImage(e, index)}
+                                        }
+                                    >
+                                        <Image
+                                            src={image}
+                                            alt="Welcome Image 1"
+                                            placeholder="blur"
+                                            quality={30}
+                                            className={index !== selectedIndex ? styles.inactive : ""}
+                                            data-left={index * 70} data-left2={index * 100} 
+                                        />
+                                    </div>
+                                ))
+                            }
+                        </div>
+                    </div>
+    
+                    <h2 style={{textAlign: "center"}}>${featuredHomes[propertyIndex.current].price}</h2>
+    
+                    <p style={{margin: "20px", textAlign: "center"}}><span style={{fontWeight: "bold"}}>{featuredHomes[propertyIndex.current].bed}</span> bed | <span style={{fontWeight: "bold"}}>{featuredHomes[propertyIndex.current].bath}</span> bath | <span style={{fontWeight: "bold"}}>{featuredHomes[propertyIndex.current].sqft}</span> sqft</p>
+    
+                    <h2 style={{textAlign: "center"}}>Map & Location</h2>
+    
+                    <p style={{textAlign: "center", margin: "20px"}}><FontAwesomeIcon icon={faLocationDot} />{featuredHomes[propertyIndex.current].address}</p>
+    
+                    <LocalMap params={{
+                        latitude: featuredHomes[propertyIndex.current].location.latitude,
+                        longitude: featuredHomes[propertyIndex.current].location.longitude,
+                    }}/>
+    
+                    <div style={{display: "flex", justifyContent: "center", alignItems: "center", margin: "20px"}}>
+                        <button className={styles.order_button}>Add to WishList</button>
                     </div>
                 </div>
-
-                <h2 style={{textAlign: "center"}}>$250,000</h2>
-
-                <p style={{margin: "20px", textAlign: "center"}}><span style={{fontWeight: "bold"}}>2</span> bed | <span style={{fontWeight: "bold"}}>2</span> bath | <span style={{fontWeight: "bold"}}>1,402</span> sqft</p>
-
-                <h2 style={{textAlign: "center"}}>Map & Location</h2>
-
-                <p style={{textAlign: "center", margin: "20px"}}><FontAwesomeIcon icon={faLocationDot} /> 41 SE 5th St Apt 1608, Miami, FL 33131</p>
-
-                <LocalMap/>
-
-                <div style={{display: "flex", justifyContent: "center", alignItems: "center", margin: "20px"}}>
-                    <button className={styles.order_button}>Add to WishList</button>
-                </div>
-            </div>
-
-            <QuestionsSection slug="Apartment"/>
-        </main>
-    )
+    
+                <QuestionsSection slug={JSON.stringify(featuredHomes[propertyIndex.current])}/>
+            </main>
+        )
+    }
 }

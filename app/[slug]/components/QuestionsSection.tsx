@@ -2,7 +2,6 @@ import React from 'react';
 import { useState, useRef } from 'react';
 import styles from "../styles/questions.module.css";
 import Image from 'next/image';
-import profileImg from "../../images/1.jpg";
 import chatBotImg from "../../images/chatbot.png";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperclip, faPaperPlane, faXmark } from '@fortawesome/free-solid-svg-icons';
@@ -15,10 +14,17 @@ interface QuestionResponses {
 export default function QuestionsSection({ slug }: { slug: string }) {
     const questionSectionRef = useRef<HTMLDivElement | null>(null);
 
+    const housingInfo = useRef(JSON.parse(slug))
+
     const chatlog = useRef([
         {
             "role": "system", 
-            "content": `You are a helpful assistant that answers questions about Housing in a Real Estate Website, and please keep your answers concise and short`,
+            "content": `
+              You are a helpful assistant that answers questions about Housing in a Real Estate Website,
+              here are some info about the particular property you will be asked questions about, it is described as ${housingInfo.current.description},
+              address is ${housingInfo.current.address}, sqft is ${housingInfo.current.sqft}, bedrooms are ${housingInfo.current.bed}, baths are ${housingInfo.current.bath},
+              and price is ${housingInfo.current.price}
+            `,
         },
     ])
 

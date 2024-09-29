@@ -1,13 +1,10 @@
 "use client"
 
 import styles from "../styles/search.module.css";
-import styles2 from "../../styles/page.module.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretDown, faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import { useState } from "react";
 import Image from "next/image";
-import Img2 from "../../images/hotel.jpg";
-import Img3 from "../../images/2.jpg";
 import Link from "next/link";
 import { featuredHomes } from "@/app/page";
 
@@ -138,7 +135,7 @@ export default function SearchResultsPage() {
         {
           featuredHomes.map((home, index)=>
             <div key={index} className={`${styles.search_result} search_result`}>
-              <Link href="/product" className={styles.search_result_image_container}>
+              <Link href={`/property-${index + 1}`} className={styles.search_result_image_container}>
                 <Image
                   src={home.img1}
                   alt="Lobby Image 2"

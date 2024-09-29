@@ -35,7 +35,12 @@ export const featuredHomes = [
     bed: "3",
     bath: "2",
     sqft: "912",
-    address: "206 Watson Rd, North Syracuse, NY 13212"
+    address: "206 Watson Rd, North Syracuse, NY 13212",
+    carousel_images: [
+      Img5, Img10, Img4, Img6
+    ],
+    location: { latitude: 40.6759, longitude: -73.9951 },
+    description: "House for Sale",
   },
   {
     img1: Img2,
@@ -45,7 +50,12 @@ export const featuredHomes = [
     bed: "4",
     bath: "2",
     sqft: "960",
-    address: "302 Mackay Ave, Syracuse, NY 13219"
+    address: "302 Mackay Ave, Syracuse, NY 13219",
+    carousel_images: [
+      Img2, Img11, Img21, Img12
+    ],
+    location: { latitude: 40.6631, longitude: -73.9942 },
+    description: "Single Family Home for Sale",
   },
   {
     img1: Img3,
@@ -55,7 +65,12 @@ export const featuredHomes = [
     bed: "6",
     bath: "3",
     sqft: "1050",
-    address: "410 Park Avenue, Yonkers, NY 10703"
+    address: "410 Park Avenue, Yonkers, NY 10703",
+    carousel_images: [
+      Img3, Img9, Img5, Img20
+    ],
+    location: { latitude: 41.7520, longitude: -74.0129 },
+    description: "Furnished House for Sale",
   },
   {
     img1: Img13,
@@ -65,7 +80,12 @@ export const featuredHomes = [
     bed: "3",
     bath: "1",
     sqft: "850",
-    address: "37 Longledge Drive, Rye Brook, NY 10573"
+    address: "37 Longledge Drive, Rye Brook, NY 10573",
+    carousel_images: [
+      Img13, Img1, Img7, Img12
+    ],
+    location:  { latitude: 40.7132, longitude: -74.0134 },
+    description: "Charming Bungalow for Sale",
   },
   {
     img1: Img14,
@@ -75,7 +95,12 @@ export const featuredHomes = [
     bed: "8",
     bath: "4",
     sqft: "1250",
-    address: "135 Daley Blvd, Rochester, NY 14617"
+    address: "135 Daley Blvd, Rochester, NY 14617",
+    carousel_images: [
+      Img14, Img7, Img2, Img1
+    ],
+    location: { latitude: 40.6743, longitude: -73.9765 },
+    description: "Luxury Home for Sale",
   },
   {
     img1: Img15,
@@ -85,7 +110,12 @@ export const featuredHomes = [
     bed: "5",
     bath: "2",
     sqft: "970",
-    address: "38 The Glen, Katonah, NY 10576"
+    address: "38 The Glen, Katonah, NY 10576",
+    carousel_images: [
+      Img15, Img16, Img9, Img10
+    ],
+    location: { latitude: 40.7574, longitude: -74.0001 },
+    description: "Move-in Ready House for Sale",
   },
   {
     img1: Img17,
@@ -95,7 +125,12 @@ export const featuredHomes = [
     bed: "3",
     bath: "1",
     sqft: "800",
-    address: "135 Daley Blvd, Rochester, NY 14617"
+    address: "135 Daley Blvd, Rochester, NY 14617",
+    carousel_images: [
+      Img17, Img12
+    ],
+    location: { latitude: 40.7350, longitude: -73.7683 },
+    description: "Spacious Family Home for Sale",
   },
   {
     img1: Img18,
@@ -105,7 +140,12 @@ export const featuredHomes = [
     bed: "4",
     bath: "2",
     sqft: "1010",
-    address: "87 Cabot Road, Massapequa, NY 11758"
+    address: "87 Cabot Road, Massapequa, NY 11758",
+    carousel_images: [
+      Img18, Img19, Img5, Img10
+    ],
+    location: { latitude: 40.7314, longitude: -74.0332 },
+    description: "Vacation Home for Sale",
   },
   {
     img1: Img4,
@@ -115,7 +155,12 @@ export const featuredHomes = [
     bed: "3",
     bath: "2",
     sqft: "850",
-    address: "1480 Pine Avenue, Bohemia, NY 11716"
+    address: "112 Ocean Avenue, Amityville, New York",
+    carousel_images: [
+      Img4, Img20, Img16, Img13
+    ],
+    location: { latitude: 40.6759, longitude: -74.1677 },
+    description: "Mountain Retreat for Sale",
   },
   {
     img1: Img21,
@@ -125,7 +170,12 @@ export const featuredHomes = [
     bed: "8",
     bath: "5",
     sqft: "1050",
-    address: "2015 Bogart Avenue, Bronx, NY 10462"
+    address: "2015 Bogart Avenue, Bronx, NY 10462",
+    carousel_images: [
+      Img21, Img22, Img11, Img8
+    ],
+    location: { latitude: 40.7455, longitude: -74.0296 },
+    description: "Beachfront Property for Sale",
   },
 ];
 
@@ -256,7 +306,7 @@ export default function Home() {
       <div className={`${styles.featured_styles} ${styles.featured_styles_second}`}>
         {
           featuredStyles2.map((featuredStyle, index)=>
-            <Link key={index} href="search.html" className={`${styles.featured_style} ${styles.big_feature}`}>
+            <Link key={index} href="/search" className={`${styles.featured_style} ${styles.big_feature}`}>
               <Image
                 src={featuredStyle.img1}
                 alt="Lobby Image 1"
@@ -311,7 +361,7 @@ export default function Home() {
         {
           featuredHomes.map((home, index)=>
             <div key={index} className={`${styles.search_result} search_result`}>
-              <Link href="/product" className={styles.search_result_image_container}>
+              <Link href={`/property-${index + 1}`} className={styles.search_result_image_container}>
                 <Image
                   src={home.img1}
                   alt="Lobby Image 2"
@@ -331,7 +381,7 @@ export default function Home() {
               <h3>${home.price}</h3>
               
               <div className={`${styles.bottom_section} bottom_section`}>
-                <p><span style={{fontWeight: "bold"}}>{home.bed}</span> beds | <span style={{fontWeight: "bold"}}>{home.bath}</span> ba | <span style={{fontWeight: "bold"}}>{home.sqft}</span> sqft - House for Sale</p>
+                <p><span style={{fontWeight: "bold"}}>{home.bed}</span> beds | <span style={{fontWeight: "bold"}}>{home.bath}</span> ba | <span style={{fontWeight: "bold"}}>{home.sqft}</span> sqft - {home.description}</p>
                 <p><FontAwesomeIcon icon={faLocationDot} />{home.address}</p>
               </div>
             </div>

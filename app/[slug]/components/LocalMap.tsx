@@ -3,13 +3,13 @@
 import { useState } from "react";
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 
-export default function LocalMap() {
+export default function LocalMap({ params }: { params: { latitude: number, longitude: number } }) {
     const { isLoaded } = useLoadScript({
         googleMapsApiKey: process.env.NEXT_PUBLIC_KEY as string,
         libraries: ["places"],
     });
 
-    const [center, setCenter] = useState({ lat: 43.45, lng: -80.49 });
+    const [center, setCenter] = useState({ lat: params.latitude, lng: params.longitude });
 
     if (isLoaded){
         return (
