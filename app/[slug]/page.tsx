@@ -7,8 +7,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 // import QuestionsSection from "./components/QuestionsSection";
 import LocalMap from "./components/LocalMap";
-import { featuredHomes } from "../page";
 import { notFound } from "next/navigation";
+import { featuredHomes } from "../components/FeaturedHomes";
 
 export default function HouseDetailsPage({ params }: { params: { slug: string }}) {
     const [selectedIndex, setSelectedIndex] = useState(0);

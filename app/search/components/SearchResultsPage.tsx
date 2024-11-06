@@ -6,7 +6,7 @@ import { faCaretDown, faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { featuredHomes } from "@/app/page";
+import { featuredHomes } from "@/app/components/FeaturedHomes";
 
 export default function SearchResultsPage() {
   const [saleOptionsOpened, setSaleOptionsOpened] = useState(false);
