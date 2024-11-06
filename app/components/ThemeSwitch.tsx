@@ -48,6 +48,10 @@ export default function ThemeSwitch() {
                                 background-color: #121212;
                                 line-height: 1.6;
                             }
+
+                            .loading{
+                               color: white; 
+                            }
         
                             nav{
                                 border-bottom-color: #ccc !important;

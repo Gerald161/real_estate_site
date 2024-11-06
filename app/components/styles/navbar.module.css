@@ -104,7 +104,16 @@
         display: block !important;
     }
 
-    .search_box, nav .third_section, .services_list{
+    .search_box, .services_list{
+        display: none;
+    }
+
+    .third_section{
+        flex: unset;
+        margin: 0 10px;
+    }
+
+    nav .third_section a:nth-child(1),nav .third_section a:nth-child(3){
         display: none;
     }
 }

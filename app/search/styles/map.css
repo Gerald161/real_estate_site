@@ -51,3 +51,9 @@
 .address_suggestions a:hover{
     color: dodgerblue;
 }
+
+@media(max-width: 700px){
+    .loading{
+        display: none; 
+    }
+}

@@ -16,7 +16,7 @@ export default function NavBarSearchForm() {
     });
 
     if(!isLoaded){
-        return <div style={{padding: "20px"}}>Loading...</div>;
+        return <div className='loading'>Loading...</div>;
     }else{
         return <NavAutoSearch/>;
     }
