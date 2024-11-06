@@ -41,7 +41,7 @@ export default function SearchResultsPage() {
                     checked={chosenPropertyOption == 0} 
                     name="type_of_property" 
                     value="sale"
-                    onChange={(e)=>{
+                    onChange={()=>{
                       setChosenPropertyOption(0)
                     }}
                   />
