@@ -9,7 +9,7 @@ export default function LocalMap({ params }: { params: { latitude: number, longi
         libraries: ["places"],
     });
 
-    const [center, setCenter] = useState({ lat: params.latitude, lng: params.longitude });
+    const [center] = useState({ lat: params.latitude, lng: params.longitude });
 
     if (isLoaded){
         return (

@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useState, useRef, useEffect } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
-import QuestionsSection from "./components/QuestionsSection";
+// import QuestionsSection from "./components/QuestionsSection";
 import LocalMap from "./components/LocalMap";
 import { featuredHomes } from "../page";
 import { notFound } from "next/navigation";
@@ -42,7 +42,8 @@ export default function HouseDetailsPage({ params }: { params: { slug: string }}
         }
     }
 
-    function slideRight(e: React.MouseEvent<HTMLElement>){
+    // e: React.MouseEvent<HTMLElement>
+    function slideRight(){
         if(selectedIndex === featuredHomes[propertyIndex.current].carousel_images.length - 1){
             sliderRef.current!.style.transition = 'unset';
             sliderRef.current!.animate([{opacity:'0.2'},{opacity:"1.0"}],{duration:500,fill:'forwards'});
@@ -68,7 +69,7 @@ export default function HouseDetailsPage({ params }: { params: { slug: string }}
         }
     }
 
-    function slideLeft(e: React.MouseEvent<HTMLElement>){
+    function slideLeft(){
         if(selectedIndex === 0){
             sliderRef.current!.style.transition = 'unset';
             sliderRef.current!.animate([{opacity:'0.2'},{opacity:"1.0"}],{duration:500,fill:'forwards'});
@@ -141,14 +142,14 @@ export default function HouseDetailsPage({ params }: { params: { slug: string }}
                         </div>
     
                         <a className={styles.prev}
-                            onClick={(e)=>{
-                                slideLeft(e);
+                            onClick={()=>{
+                                slideLeft();
                             }}
                         >&#10094;
                         </a>
                         <a className={styles.next}
-                            onClick={(e)=>{
-                                slideRight(e);
+                            onClick={()=>{
+                                slideRight();
                             }}
                         >&#10095;
                         </a> 

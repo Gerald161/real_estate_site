@@ -7,7 +7,8 @@ import { useContext } from 'react';
 import { SideBarContext } from "../contexts/SideBarContext";
 
 export default function SmallScreenButtons() {
-    const { dispatch, sideBarState } = useContext(SideBarContext);
+    // const { dispatch, sideBarState }
+    const { dispatch } = useContext(SideBarContext);
 
     function openOptions(){
         dispatch({type: "OPEN_SIDEBAR"})

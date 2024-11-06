@@ -4,7 +4,7 @@ import styles from "../styles/questions.module.css";
 import Image from 'next/image';
 import chatBotImg from "../../images/chatbot.png";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPaperclip, faPaperPlane, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faPaperclip, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 
 interface QuestionResponses {
     role: string;
@@ -60,38 +60,38 @@ export default function QuestionsSection({ slug }: { slug: string }) {
         if(aiQuestion !== ""){
           setAnswerLoading(true);
 
-          var previous_question = aiQuestion;
+          let previous_question = aiQuestion;
 
           setAiQuestion("");
 
           setAiTypyResponse("");
 
-          var oldQuestions = [...questionsAsked];
+          let oldQuestions = [...questionsAsked];
 
           oldQuestions.push({"role": "user", "message": previous_question});
 
           setQuestionsAsked(oldQuestions);
 
-          var myHeaders = new Headers();
+          let myHeaders = new Headers();
 
           myHeaders.append("Authorization", `Token ${process.env.NEXT_PUBLIC_TOKEN}`);
 
-          var formdata = new FormData();
+          let formdata = new FormData();
           
           chatlog.current.push({"role": "user", "content": previous_question});
 
           formdata.append("question", JSON.stringify(chatlog.current));
 
-          var requestOptions = {
-              method: 'POST',
-              headers: myHeaders,
-              body: formdata,
+          let requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: formdata,
           };
 
-          var res = await fetch(`http://127.0.0.1:8000/food/askAIQuestion`, requestOptions);
+          let res = await fetch(`http://127.0.0.1:8000/food/askAIQuestion`, requestOptions);
 
           if(res.ok){
-            var data = await res.json();
+            let data = await res.json();
 
             oldQuestions.push({"role": "assistant", "message": data["response"]})
 
@@ -101,7 +101,7 @@ export default function QuestionsSection({ slug }: { slug: string }) {
 
             setAnswerLoading(false);
 
-            for(var i = 0; i < oldQuestions[oldQuestions.length - 1].message.length; i ++){
+            for(let i = 0; i < oldQuestions[oldQuestions.length - 1].message.length; i ++){
               dynamicallyTypeAiResponse(oldQuestions[oldQuestions.length - 1].message[i], i, oldQuestions[oldQuestions.length- 1].message.length - 1)
             }
           }else{
@@ -120,7 +120,7 @@ export default function QuestionsSection({ slug }: { slug: string }) {
           <h2 style={{textAlign: "center"}}>AI Assistant</h2>
 
           <form onSubmit={(e)=>{
-              askAiQuestion(e).catch((e)=>{
+              askAiQuestion(e).catch(()=>{
                 setAnswerLoading(false);
 
                 setResponseComplete(true);
@@ -195,7 +195,7 @@ export default function QuestionsSection({ slug }: { slug: string }) {
 
         <div className={`${styles.ai_button_container} ai_button_container`}>
           <p>AI Chat</p>
-          <div onClick={(e)=>{
+          <div onClick={()=>{
             if(questionSectionRef.current!.style.display == "none" || questionSectionRef.current!.style.display == ""){
               questionSectionRef.current!.style.display = "block";
             }else{

@@ -20,7 +20,7 @@ export default function SearchResultsPage() {
       <div style={{display: "flex", gap: "20px"}}>
         <div className={`${styles.property_option} property_option`}>
           <div 
-            onClick={(e)=>{
+            onClick={()=>{
               setSaleOptionsOpened((prevState)=>
                 !prevState
               );
@@ -54,7 +54,7 @@ export default function SearchResultsPage() {
                     checked={chosenPropertyOption == 1} 
                     name="type_of_property" 
                     value="rent"
-                    onChange={(e)=>{
+                    onChange={()=>{
                       setChosenPropertyOption(1)
                     }}
                   />
@@ -67,7 +67,7 @@ export default function SearchResultsPage() {
                     checked={chosenPropertyOption == 2} 
                     name="type_of_property" 
                     value="lease"
-                    onChange={(e)=>{
+                    onChange={()=>{
                       setChosenPropertyOption(2)
                     }}
                   />
@@ -80,7 +80,7 @@ export default function SearchResultsPage() {
 
         <div className={`${styles.property_option} property_option`}>
           <div 
-            onClick={(e)=>{
+            onClick={()=>{
               setSaleOptionsOpened(false);
               setPriceOptionsOpened((prevState=>
                 !prevState

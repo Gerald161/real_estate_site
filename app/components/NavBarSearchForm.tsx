@@ -81,7 +81,7 @@ function NavAutoSearch(){
                     status === "OK" && 
                     data.map(({place_id, description})=>(
                         <Link key={place_id}
-                        onClick={(e)=>{
+                        onClick={()=>{
                             setValue("");
                             clearSuggestions();
                         }}
