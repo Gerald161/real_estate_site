@@ -198,7 +198,7 @@ export default function HouseDetailsPage({ params }: { params: { slug: string }}
                     </div>
                 </div>
     
-                <QuestionsSection slug={JSON.stringify(featuredHomes[propertyIndex.current])}/>
+                {/* <QuestionsSection slug={JSON.stringify(featuredHomes[propertyIndex.current])}/> */}
             </main>
         )
     }
