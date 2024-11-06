@@ -60,38 +60,38 @@ export default function QuestionsSection({ slug }: { slug: string }) {
         if(aiQuestion !== ""){
           setAnswerLoading(true);
 
-          let previous_question = aiQuestion;
+          const previous_question = aiQuestion;
 
           setAiQuestion("");
 
           setAiTypyResponse("");
 
-          let oldQuestions = [...questionsAsked];
+          const oldQuestions = [...questionsAsked];
 
           oldQuestions.push({"role": "user", "message": previous_question});
 
           setQuestionsAsked(oldQuestions);
 
-          let myHeaders = new Headers();
+          const myHeaders = new Headers();
 
           myHeaders.append("Authorization", `Token ${process.env.NEXT_PUBLIC_TOKEN}`);
 
-          let formdata = new FormData();
+          const formdata = new FormData();
           
           chatlog.current.push({"role": "user", "content": previous_question});
 
           formdata.append("question", JSON.stringify(chatlog.current));
 
-          let requestOptions = {
+          const requestOptions = {
             method: 'POST',
             headers: myHeaders,
             body: formdata,
           };
 
-          let res = await fetch(`http://127.0.0.1:8000/food/askAIQuestion`, requestOptions);
+          const res = await fetch(`http://127.0.0.1:8000/food/askAIQuestion`, requestOptions);
 
           if(res.ok){
-            let data = await res.json();
+            const data = await res.json();
 
             oldQuestions.push({"role": "assistant", "message": data["response"]})
 
