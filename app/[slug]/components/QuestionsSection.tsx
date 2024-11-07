@@ -86,7 +86,7 @@ export default function QuestionsSection({ slug }: { slug: string }) {
             body: formdata,
           };
 
-          const res = await fetch(`http://127.0.0.1:8000/food/askAIQuestion`, requestOptions);
+          const res = await fetch(process.env.NEXT_PUBLIC_AI_ENDPOINT as string, requestOptions);
 
           if(res.ok){
             const data = await res.json();
