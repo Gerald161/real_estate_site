@@ -82,7 +82,7 @@ export default function QuestionsSection({ slug }: { slug: string }) {
             method: 'GET',
           };
 
-          const res = await fetch(`${process.env.NEXT_PUBLIC_API as string}?question=${JSON.stringify(chatlog.current)}`, requestOptions);
+          const res = await fetch(`https://restaurant-hosting.vercel.app/food/askAIQuestion?question=${JSON.stringify(chatlog.current)}`, requestOptions);
 
           if(res.ok){
             const data = await res.json();
