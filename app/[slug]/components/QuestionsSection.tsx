@@ -86,7 +86,7 @@ export default function QuestionsSection({ slug }: { slug: string }) {
             body: formdata,
           };
 
-          const res = await fetch(process.env.NEXT_PUBLIC_AI_ENDPOINT as string, requestOptions);
+          const res = await fetch(process.env.NEXT_PUBLIC_AIENDPOINT as string, requestOptions);
 
           if(res.ok){
             const data = await res.json();
