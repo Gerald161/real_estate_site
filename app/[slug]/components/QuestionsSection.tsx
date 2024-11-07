@@ -72,18 +72,17 @@ export default function QuestionsSection({ slug }: { slug: string }) {
 
           setQuestionsAsked(oldQuestions);
 
-          const formdata = new FormData();
+          // const formdata = new FormData();
           
           chatlog.current.push({"role": "user", "content": previous_question});
 
-          formdata.append("question", JSON.stringify(chatlog.current));
+          // formdata.append("question", JSON.stringify(chatlog.current));
 
           const requestOptions = {
             method: 'GET',
-            // body: formdata,
           };
 
-          const res = await fetch(`https://restaurant-hosting.vercel.app/food/askAIQuestion`, requestOptions);
+          const res = await fetch(`${process.env.NEXT_PUBLIC_API as string}?question=${JSON.stringify(chatlog.current)}`, requestOptions);
 
           if(res.ok){
             const data = await res.json();
