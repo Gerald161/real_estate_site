@@ -72,10 +72,6 @@ export default function QuestionsSection({ slug }: { slug: string }) {
 
           setQuestionsAsked(oldQuestions);
 
-          const myHeaders = new Headers();
-
-          myHeaders.append("Authorization", `Token ${process.env.NEXT_PUBLIC_TOKEN}`);
-
           const formdata = new FormData();
           
           chatlog.current.push({"role": "user", "content": previous_question});
@@ -83,9 +79,8 @@ export default function QuestionsSection({ slug }: { slug: string }) {
           formdata.append("question", JSON.stringify(chatlog.current));
 
           const requestOptions = {
-            method: 'POST',
-            headers: myHeaders,
-            body: formdata,
+            method: 'GET',
+            // body: formdata,
           };
 
           const res = await fetch(`https://restaurant-hosting.vercel.app/food/askAIQuestion`, requestOptions);
