@@ -74,8 +74,6 @@ export default function QuestionsSection({ slug }: { slug: string }) {
 
           const myHeaders = new Headers();
 
-          myHeaders.append("Authorization", `Token ${process.env.NEXT_PUBLIC_TOKEN}`);
-
           const formdata = new FormData();
           
           chatlog.current.push({"role": "user", "content": previous_question});
