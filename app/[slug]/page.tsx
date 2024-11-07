@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useState, useRef, useEffect } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
-// import QuestionsSection from "./components/QuestionsSection";
+import QuestionsSection from "./components/QuestionsSection";
 import LocalMap from "./components/LocalMap";
 import { notFound } from "next/navigation";
 import { featuredHomes } from "../components/FeaturedHomes";
@@ -199,7 +199,7 @@ export default function HouseDetailsPage({ params }: { params: { slug: string }}
                     </div>
                 </div>
     
-                {/* <QuestionsSection slug={JSON.stringify(featuredHomes[propertyIndex.current])}/> */}
+                <QuestionsSection slug={JSON.stringify(featuredHomes[propertyIndex.current])}/>
             </main>
         )
     }

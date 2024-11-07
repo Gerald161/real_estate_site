@@ -8,7 +8,7 @@ import { faPaperclip, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 
 interface QuestionResponses {
     role: string;
-    message: string;
+    content: string;
 }
 
 export default function QuestionsSection({ slug }: { slug: string }) {
@@ -68,7 +68,7 @@ export default function QuestionsSection({ slug }: { slug: string }) {
 
           const oldQuestions = [...questionsAsked];
 
-          oldQuestions.push({"role": "user", "message": previous_question});
+          oldQuestions.push({"role": "user", "content": previous_question});
 
           setQuestionsAsked(oldQuestions);
 
@@ -93,7 +93,7 @@ export default function QuestionsSection({ slug }: { slug: string }) {
           if(res.ok){
             const data = await res.json();
 
-            oldQuestions.push({"role": "assistant", "message": data["response"]})
+            oldQuestions.push({"role": "assistant", "content": data["response"]})
 
             setQuestionsAsked(oldQuestions);
 
@@ -101,8 +101,8 @@ export default function QuestionsSection({ slug }: { slug: string }) {
 
             setAnswerLoading(false);
 
-            for(let i = 0; i < oldQuestions[oldQuestions.length - 1].message.length; i ++){
-              dynamicallyTypeAiResponse(oldQuestions[oldQuestions.length - 1].message[i], i, oldQuestions[oldQuestions.length- 1].message.length - 1)
+            for(let i = 0; i < oldQuestions[oldQuestions.length - 1].content.length; i ++){
+              dynamicallyTypeAiResponse(oldQuestions[oldQuestions.length - 1].content[i], i, oldQuestions[oldQuestions.length- 1].content.length - 1)
             }
           }else{
             setAnswerLoading(false);
@@ -139,7 +139,7 @@ export default function QuestionsSection({ slug }: { slug: string }) {
                             {
                                 question.role === "user" ?
                                 <div className={`${styles.profile_pic} profile_pic`}>
-                                  {question.message}
+                                  {question.content}
                                 </div>
                                 :
                                 <>
@@ -157,7 +157,7 @@ export default function QuestionsSection({ slug }: { slug: string }) {
                                     questionsAsked.length - 1 !== index ?
                                     <p className={`${styles.response} response`}>
                                     {
-                                      question.message
+                                      question.content
                                     }
                                     </p> :
                                     <p className={`${styles.response} response`}>
