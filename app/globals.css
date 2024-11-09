@@ -1,0 +1,64 @@
+*{
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+    box-sizing: border-box;
+}
+
+body{
+    overflow-x: hidden;
+}
+
+nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 15px;
+    border-bottom: solid 1px black;
+    gap: 5px;
+}
+
+a{
+    text-decoration: none;
+    transition: color 0.4s;
+    color: black;
+}
+
+a:hover, .services_list_left a:hover, .services_list_right a:hover{
+    color: dodgerblue;
+}
+
+footer{
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+    flex-wrap: wrap;
+    border-bottom: solid #ccc 1px;
+    background-color: #e0e0e0;
+}
+
+svg{
+    width: 20px;
+    height: 20px;
+}
+
+main{
+    display: flex;
+    padding: 20px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+input[type="radio"]{
+    width: 20px;
+    height: 20px;
+    cursor: pointer; 
+}
+
+@media(max-width: 700px){
+    nav{
+        margin-bottom: 0;
+    }
+}
